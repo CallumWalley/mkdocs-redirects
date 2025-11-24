@@ -5,6 +5,7 @@ All rights reserved.
 import logging
 import os
 import posixpath
+import locale
 
 from mkdocs import utils
 from mkdocs.config import config_options
