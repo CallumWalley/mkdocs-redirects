@@ -21,12 +21,11 @@ HTML_TEMPLATE = """
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <link rel="canonical" href="{url}">
-    <meta name="robots" content="noindex">
     <script>var anchor=window.location.hash.substr(1);location.href="{url}"+(anchor?"#"+anchor:"")</script>
     <meta http-equiv="refresh" content="0; url={url}">
 </head>
 <body>
-Redirecting...
+You're being redirected to a <a href="{url}">new destination</a>.
 </body>
 </html>
 """
@@ -91,7 +90,7 @@ class RedirectPlugin(BasePlugin):
             self.redirects = self.config.get('redirect_maps', {})
 
         # Validate user-provided redirect "old files"
-        for page_old in self.redirects.keys():
+        for page_old in self.redirects:
             if not utils.is_markdown_file(page_old):
                 log.warning("redirects plugin: '%s' is not a valid markdown file!", page_old)
 
