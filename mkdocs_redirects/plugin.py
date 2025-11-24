@@ -2,6 +2,7 @@
 Copyright 2019-2022 DataRobot, Inc. and its affiliates.
 All rights reserved.
 """
+import locale
 import logging
 import os
 import posixpath
@@ -77,8 +78,8 @@ class RedirectPlugin(BasePlugin):
 
     # Build a list of redirects on file generation
     def on_files(self, files, config, **kwargs):
-        if self.config.get('map_file'):
-            filename = self.config.get('map_file')
+        if self.config.get("map_file"):
+            filename = self.config.get("map_file")
             if os.path.isfile(filename):
                 with open(filename, encoding=locale.getpreferredencoding(False)) as f:
                     self.redirects = utils.yaml_load(f)
@@ -86,8 +87,8 @@ class RedirectPlugin(BasePlugin):
             else:
                 log.warning("yaml configuration file '%s' was not found!", filename)
         # If no mapfile, fall back to regular method.
-        if not hasattr(self, 'redirects'):
-            self.redirects = self.config.get('redirect_maps', {})
+        if not hasattr(self, "redirects"):
+            self.redirects = self.config.get("redirect_maps", {})
 
         # Validate user-provided redirect "old files"
         for page_old in self.redirects:
