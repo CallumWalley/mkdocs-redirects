@@ -80,7 +80,7 @@ class RedirectPlugin(BasePlugin):
         if self.config.get('map_file'):
             filename = self.config.get('map_file')
             if os.path.isfile(filename):
-                with open(filename) as f:
+                with open(filename, encoding=locale.getpreferredencoding(False)) as f:
                     self.redirects = utils.yaml_load(f)
                     log.debug("Loading yaml file: '%s'", filename)
             else:
